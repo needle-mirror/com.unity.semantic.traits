@@ -1,0 +1,27 @@
+.traitLabel {
+    -unity-slice-left: 9;
+    -unity-slice-top: 7;
+    -unity-slice-bottom: 7;
+    -unity-slice-right: 9;
+    height: 15px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-right: 5px;
+    margin-bottom: 4px;
+    background-image: resource("Packages/com.unity.semantic.traits/Editor/Unity.Semantic.Traits.Editor/Images/SemanticLink.png");
+}
+
+.traitAddButton {
+    width: 16px;
+    height: 15px;
+    margin-right: 5px;
+    margin-bottom: 4px;
+    background-image: resource("Packages/com.unity.semantic.traits/Editor/Unity.Semantic.Traits.Editor/Images/RequiredTraitAdd.png");
+}
+
+.horizontal-wrap {
+    flex-direction: row;
+    flex-wrap: wrap;
+}

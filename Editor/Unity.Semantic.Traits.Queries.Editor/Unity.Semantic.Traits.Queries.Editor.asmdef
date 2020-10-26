@@ -1,0 +1,21 @@
+{
+    "name": "Unity.Semantic.Traits.Queries.Editor",
+    "references": [
+        "GUID:49e4309bdb596a343b58817cdec9da56",
+        "GUID:d5039002ddf0f9b4b884a3fb9233b682",
+        "GUID:041316a676ce8474fbf56b1d3ce2831f",
+        "GUID:734d92eba21c94caba915361bd5ac177",
+        "GUID:d626eb8ed9ac9014db2d05f57fc6504b"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

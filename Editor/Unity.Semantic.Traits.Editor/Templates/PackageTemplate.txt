@@ -1,0 +1,5 @@
+{
+  "name": "{{ package_name | string.downcase }}",
+  "displayName": "{{ display_name }} (Generated Code)",
+  "version": "0.0.0"
+}

@@ -1,0 +1,14 @@
+.title {
+    height: 20px;
+    -unity-font-style: bold;
+    flex-grow: 1;
+    border-top-width: 1px;
+    margin-top: 6px;
+    margin-left: -15px;
+    margin-right: -6px;
+    padding-left: 16px;
+}
+
+.warning {
+    -unity-font-style: italic;
+}

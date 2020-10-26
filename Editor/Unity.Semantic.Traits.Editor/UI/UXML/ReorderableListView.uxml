@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UXML xmlns="UnityEngine.UIElements">
+    <VisualElement>
+        <VisualElement name="listPanel">
+            <Label name="emptyMessage" text="List is Empty" class="listItemEmpty"/>
+            <VisualElement name="itemsRoot"/>
+        </VisualElement>
+        <VisualElement class="horizontal"> 
+            <VisualElement name="buttonSpacer"/>
+            <VisualElement name="buttonContainer" class="horizontal">
+                <Button name="addButton" text="+" class="listButton"/>
+                <Button name="removeButton" text="-" class="listButton"/>                  
+            </VisualElement>
+        </VisualElement>
+    </VisualElement>
+</UXML>

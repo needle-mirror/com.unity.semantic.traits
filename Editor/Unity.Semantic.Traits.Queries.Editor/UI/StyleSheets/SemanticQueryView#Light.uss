@@ -1,0 +1,90 @@
+.blockField {
+    border-color: #888888;
+    background-color: #BABABA;
+}
+
+.blockField--variant {
+    border-color: #888888;
+    background-color: #BCBCBC;
+}
+
+.blockField::hover {
+   background-color: #BCBCBC;
+}
+
+.blockField--variant::hover {
+   background-color: #BDBDBD;
+}
+
+.sortMethodContainer {
+    background-color: #373b3e;
+    border-color: #2d2d2d;
+}
+
+.sortMethodButton {
+    background-color: #373b3e;
+    -unity-background-image-tint-color: #CCCCCC;
+}
+
+.sortMethodButton:hover  {
+  background-color: #393d40;
+  -unity-background-image-tint-color: #ffffff;
+}
+
+.sortMethodField {
+    background-color: #373b3e;
+}
+
+.groupHeader {
+    background-color: #888888;
+}
+
+.groupHeaderButton {
+    background-color: #2d2d2d;
+    border-color: #121212;
+}
+
+.groupHeaderAddButton {
+    background-color: #AAAAAA;
+    -unity-background-image-tint-color: #9c9c9c;
+}
+
+.groupHeaderAddButton:hover  {
+  background-color: #424242;
+  -unity-background-image-tint-color: #ffffff;
+}
+
+.groupHeaderLabel {
+    color: #CCCCCC;
+}
+
+.groupFooter {
+    background-color: #888888;
+}
+
+#AddBlock {
+    background-color: #888888;
+}
+
+.filterContainer {
+    border-color: #888888;
+}
+
+.withTraitContainer {
+    border-color: #888888;
+}
+
+.sortMethodEmptyField {
+    background-color: #373b3e;
+    color: #999999;
+}
+
+.AddButton:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.title {
+    color: #CCCCCC;
+    border-color: #555555;
+    background-color: #999999;
+}

@@ -1,0 +1,221 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.Semantic.Traits;
+using Unity.Entities;
+using UnityEngine;
+
+namespace {{ namespace }}
+{
+    [ExecuteAlways]
+    [DisallowMultipleComponent]
+    [AddComponentMenu("Semantic/Traits/{{ name }} (Trait)")]
+    [RequireComponent(typeof(SemanticObject))]
+    public partial class {{ name }} : MonoBehaviour, ITrait
+    {
+        {{- for field in fields }}
+        {{- if field.field_type | string.contains "List" }}
+        public IReadOnly{{ field.field_type }} {{ field.field_name }}
+        {{- else }}
+        public {{ field.field_type }} {{ field.field_name }}
+        {{- end }}
+        {
+            get
+            {
+                if (m_EntityManager != default && m_EntityManager.HasComponent<{{ name }}Data>(m_Entity))
+                {
+                {{- if field.field_type | string.contains "GameObject" }}
+                    var data = m_EntityManager.GetComponentData<{{ name }}Data>(m_Entity);
+                    if (data.{{ field.field_name }} != default)
+                        m_p{{ field.field_id }} = m_EntityManager.GetComponentObject<Transform>(data.{{ field.field_name }}).gameObject;
+                {{- else if field.field_type | string.contains "System.String" }}
+                    m_p{{ field.field_id }} = m_EntityManager.GetComponentData<{{ name }}Data>(m_Entity).{{ field.field_name }}.ToString();
+                {{- else if field.field_type | string.contains "List" }}
+                    m_p{{ field.field_id }}.Clear();
+                    var values = m_EntityManager.GetComponentData<{{ name }}Data>(m_Entity).{{ field.field_name }};
+                    foreach (var v in values)
+                        m_p{{ field.field_id }}.Add(v);
+                {{- else }}
+                    m_p{{ field.field_id }} = m_EntityManager.GetComponentData<{{ name }}Data>(m_Entity).{{ field.field_name }};
+                {{- end }}
+                }
+
+                return m_p{{ field.field_id }};
+            }
+            set
+            {
+                {{ name }}Data data = default;
+                var dataActive = m_EntityManager != default && m_EntityManager.HasComponent<{{ name }}Data>(m_Entity);
+                if (dataActive)
+                    data = m_EntityManager.GetComponentData<{{ name }}Data>(m_Entity);
+                {{- if field.field_type | string.contains "GameObject" }}
+                Entity entity = default;
+                if (value != null)
+                {
+                    var semanticObject = value.GetComponent<SemanticObject>();
+                    if (semanticObject)
+                        entity = semanticObject.Entity;
+                }
+                m_p{{ field.field_id }} = value;
+                data.{{ field.field_name }} = entity;
+                {{- else if field.field_type | string.contains "List" }}
+                m_p{{ field.field_id }}.Clear();
+                m_p{{ field.field_id }}.AddRange(value);
+                data.{{ field.field_name }}.Clear();
+                foreach (var v in value)
+                    data.{{ field.field_name }}.Add(v);
+                {{- else }}
+                data.{{ field.field_name }} = m_p{{ field.field_id }} = value;
+                {{- end }}
+                if (dataActive)
+                    m_EntityManager.SetComponentData(m_Entity, data);
+            }
+        }
+        {{- end }}
+
+        {{- if !fields.empty? }}
+        public {{ name }}Data Data
+        {
+            get => m_EntityManager != default && m_EntityManager.HasComponent<{{ name }}Data>(m_Entity) ?
+                m_EntityManager.GetComponentData<{{ name }}Data>(m_Entity) : GetData();
+            set
+            {
+                if (m_EntityManager != default && m_EntityManager.HasComponent<{{ name }}Data>(m_Entity))
+                    m_EntityManager.SetComponentData(m_Entity, value);
+            }
+        }
+
+        #pragma warning disable 649
+        {{- for field in fields }}
+        [SerializeField]
+        [InspectorName("{{ field.field_name }}")]
+        {{- if field.field_type | string.contains "List" }}
+        [Tooltip("Maximum list size supported for this field is currently {{ field.max_length }}.")]
+        {{ field.field_type }} m_p{{ field.field_id }} = new {{ field.field_type }}();
+        {{- else if field.field_type | string.contains "System.String" }}
+        [Tooltip("Maximum string length supported is currently {{ field.max_length }}.")]
+        {{ field.field_type }} m_p{{ field.field_id }} = {{ if field.default_value == null -}}string.Empty{{- else -}}"{{- field.default_value -}}"{{- end -}};
+        {{- else }}
+        {{ field.field_type }} m_p{{ field.field_id }} = {{ if field.default_value == null -}}default{{- else -}}{{- field.default_value -}}{{- end -}};
+        {{- end }}
+        {{- end }}
+        #pragma warning restore 649
+        {{- end }}
+
+        EntityManager m_EntityManager;
+        World m_World;
+        Entity m_Entity;
+
+        {{ if !fields.empty? -}}
+        {{ name }}Data GetData()
+        {
+            {{ name }}Data data = default;
+
+            {{- for field in fields }}
+            {{- if field.field_type | string.contains "GameObject" }}
+            if (m_p{{ field.field_id }})
+            {
+                var semanticObject = m_p{{ field.field_id }}.GetComponent<SemanticObject>();
+                if (semanticObject)
+                    data.{{ field.field_name }} = semanticObject.Entity;
+            }
+            {{- else if field.field_type | string.contains "List" }}
+            foreach (var v in m_p{{ field.field_id }})
+                data.{{ field.field_name }}.Add(v);
+            {{- else }}
+            data.{{ field.field_name }} = m_p{{ field.field_id }};
+            {{- end }}
+            {{- end }}
+
+            return data;
+        }
+
+        {{- for field in fields }}
+        {{- if field.field_type | string.contains "GameObject" }}
+        {{- $has_relations = true }}
+        {{- end }}
+        {{- end }}
+
+        {{ if $has_relations -}}
+        IEnumerator UpdateRelations()
+        {
+            yield return null; // Wait one frame for all game objects to be converted to entities
+            {{- for field in fields }}
+            {{- if field.field_type | string.contains "GameObject" }}
+            {{ field.field_name }} = m_p{{ field.field_id }};
+            {{- end }}
+            {{- end }}
+            yield break;
+        }
+        {{- end }}
+        {{- end ~}}
+
+        void OnEnable()
+        {
+            // Handle the case where this trait is added after conversion
+            var semanticObject = GetComponent<SemanticObject>();
+            if (semanticObject && !semanticObject.Entity.Equals(default))
+                Convert(semanticObject.Entity, semanticObject.EntityManager, null);
+        }
+
+        public void Convert(Entity entity, EntityManager destinationManager, GameObjectConversionSystem _)
+        {
+            m_Entity = entity;
+            m_EntityManager = destinationManager;
+            m_World = destinationManager.World;
+
+            if (!destinationManager.HasComponent(entity, typeof({{ name }}Data)))
+            {
+                {{- if fields.empty? }}
+                destinationManager.AddComponent<{{ name }}Data>(entity);
+                {{- else }}
+                destinationManager.AddComponentData(entity, GetData());
+                {{- if $has_relations }}
+                StartCoroutine(UpdateRelations());
+                {{- end }}
+                {{- end }}
+            }
+        }
+
+        void OnDestroy()
+        {
+            if (m_World != default && m_World.IsCreated)
+            {
+                m_EntityManager.RemoveComponent<{{ name }}Data>(m_Entity);
+                if (m_EntityManager.GetComponentCount(m_Entity) == 0)
+                    m_EntityManager.DestroyEntity(m_Entity);
+            }
+        }
+
+        {{ if !fields.empty? -}}
+        void OnValidate()
+        {
+            {{- for field in fields }}
+            {{- if field.field_type | string.contains "List" }}
+            if (m_p{{ field.field_id }}.Count > {{ field.max_length }})
+            {
+                Debug.LogWarning("The list property '{{ field.field_name }}' can only have {{ field.max_length }} elements maximum currently. Truncating...", this);
+                m_p{{ field.field_id }}.RemoveRange({{ field.max_length }}, m_p{{ field.field_id }}.Count - {{ field.max_length }});
+            }
+            {{- else if field.field_type | string.contains "System.String" }}
+            if (m_p{{ field.field_id }}.Length > {{ field.max_length }})
+            {
+                Debug.LogWarning("Strings can only have {{ field.max_length }} characters maximum currently. Truncating...", this);
+                m_p{{ field.field_id }} = m_p{{ field.field_id }}.Substring(0, {{ field.max_length }});
+            }
+            {{- end }}
+            {{- end }}
+
+            // Commit local fields to backing store
+            Data = GetData();
+        }
+        {{- end }}
+
+#if UNITY_EDITOR
+        void OnDrawGizmos()
+        {
+            TraitGizmos.DrawGizmoForTrait(nameof({{ name }}Data), gameObject, {{- if fields.empty? -}}null{{- else -}}Data{{- end -}});
+        }
+#endif
+    }
+}

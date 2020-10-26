@@ -1,0 +1,9 @@
+.title {
+    color: #CCCCCC;
+    border-color: #323232;
+    background-color: #727272;
+}
+
+.warning {
+     color: #DD2222;
+}

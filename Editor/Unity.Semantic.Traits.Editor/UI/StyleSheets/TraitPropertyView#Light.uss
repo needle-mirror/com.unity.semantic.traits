@@ -1,0 +1,11 @@
+.textName {
+    color: #202020;
+}
+
+.valueLabel {
+    color: #454545;
+}
+
+.textType {
+    color: #7c7c7c;
+}

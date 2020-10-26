@@ -1,0 +1,167 @@
+.blockField {
+    height: 26px;
+    border-bottom-width: 0px;
+    border-left-width: 20px;
+    border-right-width: 1px;
+    padding-right: 25px;
+    margin-right: 2px;
+    flex-grow: 1;
+}
+
+.blockField--variant {
+}
+
+.blockField::hover {
+}
+
+.blockField--variant::hover {
+}
+
+.sortMethodContainer {
+    border-width: 0px;
+    border-left-width: 20px;
+    flex-direction: row;
+    border-right-width: 1px;
+    margin-right: 2px;
+}
+
+.sortMethodButton {
+    height: 18px;
+    width: 18px;
+    border-width: 0px;
+    margin-top: 3px;
+    background-image: resource('d_AlphabeticalSorting.png');
+}
+
+.sortMethodButton:hover  {
+}
+
+.sortMethodField {
+    height: 26px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    padding-right: 6px;
+    flex-grow: 1;
+}
+
+.labelBlock {
+    padding-top: 3px;
+}
+
+.fieldBlock {
+   min-width: 20px;
+   flex-grow: 1;
+}
+
+.groupHeader {
+    height: 25px;
+    flex-direction: row;
+    margin-right: 2px;
+}
+
+.groupHeaderButton {
+    height: 18px;
+    padding-top: 1px;
+    margin-left: 2px;
+    margin-top: 2px;
+}
+
+.groupHeaderAddButton {
+    height: 18px;
+    border-width: 0;
+    margin-left: 1px;
+    margin-right: 2px;
+    margin-top: 3px;
+    background-image: resource('d__Menu.png');
+}
+
+.groupHeaderAddButton:hover  {
+}
+
+.groupHeaderLabel {
+    height: 18px;
+    color: #8c8c8c;
+    padding-top: 2px;
+    margin-top: 2px;
+}
+
+.groupFooter {
+    height: 22px;
+    width: 82px;
+    margin: 0px;
+    border-width:0px;
+    flex-direction: row;
+}
+
+#AddBlock {
+    background-image: resource('d_CreateAddNew.png');
+    width: 16px;
+    height: 16px;
+    margin: 3px;
+}
+
+.filterContainer {
+    height: 26px;
+    flex-direction: row;
+    border-left-width:2px;
+    padding-left: 5px;
+    padding-top: 3px;
+    flex-grow: 1;
+}
+
+.withTraitContainer {
+    height: 26px;
+    border-left-width:2px;
+    padding-left: 5px;
+    padding-top: 3px;
+    flex-grow: 1;
+}
+
+.sortMethodEmptyField {
+    height: 26px;
+    padding-right: 25px;
+    padding-top:5px;
+    -unity-font-style: italic;
+}
+
+.horizontal {
+    flex-direction: row;
+}
+
+.grow {
+    flex-grow: 1;
+}
+
+.AddButton {
+    flex-direction: row;
+    align-items: center;
+    height: 22px;
+    padding: 2px;
+}
+
+.AddButton:hover {
+}
+
+.AddButton .AddIcon {
+    background-image: resource('d_CreateAddNew.png');
+    width: 16px;
+    height: 16px;
+}
+
+.AddButton .DropdownIcon {
+    background-image: resource('d_dropdown.png');
+    width: 12px;
+    height: 12px;
+}
+
+.title {
+    height: 20px;
+    -unity-font-style: bold;
+    flex-grow: 1;
+    border-top-width: 1px;
+    margin-top: 6px;
+    margin-bottom: 4px;
+    margin-left: -15px;
+    margin-right: -6px;
+    padding-left: 16px;
+}

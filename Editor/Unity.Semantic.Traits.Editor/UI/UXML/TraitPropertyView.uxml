@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UXML xmlns="UnityEngine.UIElements">
+        <VisualElement class="horizontal">
+            <Label class="textName" name="nameLabel"/>
+            <Label class="textType" name="typeLabel"/>
+            <TextField class="textName" name="nameTextField"/>
+        </VisualElement>
+</UXML>

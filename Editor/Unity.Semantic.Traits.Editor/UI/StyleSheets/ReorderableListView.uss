@@ -1,0 +1,73 @@
+#listPanel {
+    flex-grow: 1;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-left-width: 1px;
+    margin-top: 5px;
+}
+
+#buttonContainer {
+    width: 60px;
+    height: 24px;
+    border-bottom-width: 1px;
+    border-right-width: 1px;
+    border-left-width: 1px;
+    justify-content: center;
+}
+
+#buttonSpacer {
+    flex: 1;
+    border-top-width: 1px;
+}
+
+.dragHandle {
+    width: 2px;
+    height: 8px;
+    margin: 4px;
+}
+
+.reorderableItem {
+    flex-grow: 1;
+    min-height: 26px;
+    padding: 2px;
+}
+
+.reorderableItem--variant {
+}
+
+.reorderableItem--selected {
+    border-width: 1px;
+    padding: 1px;
+}
+
+.listItemEmpty {
+    padding: 4px;
+}
+
+.listItem {
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.listButton {
+    width: 20px;
+    font-size: 21px;
+    -unity-font-style: bold;
+    margin-bottom: 2px;
+    padding: 0px;
+    border-width: 0px;
+}
+
+.listButton:active {
+}
+
+.listButton:hover {
+}
+
+.horizontal {
+    flex-direction: row;
+}
+
+.flex_space {
+    flex: 1;
+}

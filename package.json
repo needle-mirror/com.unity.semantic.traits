@@ -1,0 +1,19 @@
+{
+  "name": "com.unity.semantic.traits",
+  "displayName": "Semantic Traits",
+  "version": "0.2.7-preview",
+  "unity": "2020.1",
+  "description": "Semantic Traits package provides a modeling language to define data schema for labeling and querying runtime objects.",
+  "dependencies": {
+    "com.unity.entities": "0.16.0-preview.21",
+    "com.unity.nuget.scriban": "2.1.4-preview"
+  },
+  "upmCi": {
+    "footprint": "7f1efe84bd96d6d2e5604019b779fdab7642d9b1"
+  },
+  "repository": {
+    "url": "https://github.com/Unity-Technologies/com.unity.semantic.traits.git",
+    "type": "git",
+    "revision": "f769b7a4a0ceced32718cb1f9a29b80e3d8ef653"
+  }
+}

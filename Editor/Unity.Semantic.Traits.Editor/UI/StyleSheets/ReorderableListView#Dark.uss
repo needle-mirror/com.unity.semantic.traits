@@ -1,0 +1,38 @@
+#listPanel {
+    border-color: #242424;
+    background-color: #414141;
+}
+
+#buttonContainer {
+    border-color: #242424;
+    background-color: #414141;
+}
+
+#buttonSpacer {
+    border-color: #242424;
+}
+
+.reorderableItem {
+    background-color: #414141;
+}
+
+.reorderableItem--variant {
+    background-color: #3c3c3c;
+}
+
+.reorderableItem--selected {
+    border-color: #888888;
+    background-color: #464a50;
+}
+
+.listButton {
+    background-color: #414141;
+}
+
+.listButton:active {
+    color: #242424;
+}
+
+.listButton:hover {
+    background-color: #464646;
+}

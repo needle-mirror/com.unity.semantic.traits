@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UXML xmlns="UnityEngine.UIElements">
+    <Label text="Query" class="title"/>
+    <VisualElement name="QueryBlock"/>
+
+    <VisualElement class="groupFooter">
+      <VisualElement class="grow"/>
+      <Button name="AddBlock"/>
+    </VisualElement>
+    <Label text="Result (Preview)" class="title"/>
+    <VisualElement name="previewResults"/>
+</UXML>
