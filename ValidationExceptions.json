@@ -1,0 +1,10 @@
+{
+    "ErrorExceptions":
+    [
+        {
+             "ValidationTest": "API Validation",
+             "ExceptionMessage": "Assembly \"Unity.Entities.Hybrid\" no longer exists or is no longer included in build. For Experimental or Preview Packages, this change requires a new minor version.",
+             "PackageVersion": "0.2.8-preview"
+        }
+    ]
+}

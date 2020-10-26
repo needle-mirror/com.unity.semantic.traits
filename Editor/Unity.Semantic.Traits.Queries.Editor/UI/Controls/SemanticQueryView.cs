@@ -34,6 +34,9 @@ namespace UnityEditor.Semantic.Traits.Queries.UI
         const string k_AddBlockButtonName = "AddBlock";
         const string k_QueryBlockName = "QueryBlock";
 
+        const int k_FilterIdWithTraits = -1;
+        const int k_FilterIdWithoutTraits = -2;
+
         SerializedProperty m_QueryGroupsProperty;
 
         Dictionary<string, Type> m_QueryTypes;
@@ -89,10 +92,25 @@ namespace UnityEditor.Semantic.Traits.Queries.UI
 
             var traitFilterView = new PropertyField(traitFilterProperty);
             traitFilterView.AddToClassList(k_WithTraitContainerUssClassName);
-            traitFilterView.userData = (-1, traitFilterProperty, groupProperty);
+            traitFilterView.userData = (k_FilterIdWithTraits, traitFilterProperty, groupProperty);
             traitFilterView.RegisterCallback<MouseDownEvent>(BlockContextMenu);
             traitFilterView.Bind(groupProperty.serializedObject);
             traitFilterContainer.Add(traitFilterView);
+
+            traitFilterProperty = groupProperty.FindPropertyRelative("m_ProhibitedTraits");
+            if (traitFilterProperty.isExpanded)
+            {
+                traitFilterContainer = new VisualElement();
+                traitFilterContainer.AddToClassList(k_BlockFieldUssClassName);
+                queryBLocks.Add(traitFilterContainer);
+
+                traitFilterView = new PropertyField(traitFilterProperty);
+                traitFilterView.AddToClassList(k_WithTraitContainerUssClassName);
+                traitFilterView.userData = (k_FilterIdWithoutTraits, traitFilterProperty, groupProperty);
+                traitFilterView.RegisterCallback<MouseDownEvent>(BlockContextMenu);
+                traitFilterView.Bind(groupProperty.serializedObject);
+                traitFilterContainer.Add(traitFilterView);
+            }
 
             // Display filter list
             var filterListProperty = groupProperty.FindPropertyRelative("m_Filters");
@@ -186,8 +204,22 @@ namespace UnityEditor.Semantic.Traits.Queries.UI
 
             var menu = new GenericMenu();
 
-            if (groupData.Item1 == -1)
+            if (groupData.Item1 == k_FilterIdWithTraits)
+            {
                 menu.AddDisabledItem(new GUIContent("Remove"));
+            }
+            if (groupData.Item1 == k_FilterIdWithoutTraits)
+            {
+                menu.AddItem(new GUIContent("Remove"), false, () =>
+                {
+                    group.serializedObject.Update();
+                    groupData.Item2.FindPropertyRelative("m_Traits").arraySize = 0;
+                    groupData.Item2.isExpanded = false;
+                    group.serializedObject.ApplyModifiedProperties();
+
+                    RefreshQueryBlocks();
+                });
+            }
             else
             {
                 menu.AddItem(new GUIContent("Remove"), false, () =>
@@ -260,6 +292,23 @@ namespace UnityEditor.Semantic.Traits.Queries.UI
             var menu = new GenericMenu();
 
             AddQueryFilterItem(group.FindPropertyRelative("m_Filters"), menu);
+
+            var withoutFilterProperty = group.FindPropertyRelative("m_ProhibitedTraits");
+            if (!withoutFilterProperty.isExpanded)
+            {
+                menu.AddItem(new GUIContent($"Add Filter/Without Traits"), false, () =>
+                {
+                    group.serializedObject.Update();
+                    withoutFilterProperty.isExpanded = true;
+                    group.serializedObject.ApplyModifiedProperties();
+
+                    RefreshQueryBlocks();
+                });
+            }
+            else
+            {
+                menu.AddDisabledItem(new GUIContent("Add Filter/Without Traits"));
+            }
 
             menu.AddSeparator("");
 

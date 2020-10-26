@@ -25,6 +25,10 @@
     background-color: #A1A1B1;
 }
 
+.listItemEmpty {
+    background-color: #A1A1A1;
+}
+
 .listButton {
     background-color: #A1A1A1;
 }

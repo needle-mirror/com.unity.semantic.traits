@@ -27,8 +27,8 @@
 }
 
 .sortMethodButton:hover  {
-  background-color: #393d40;
-  -unity-background-image-tint-color: #ffffff;
+    background-color: #393d40;
+    -unity-background-image-tint-color: #ffffff;
 }
 
 .sortMethodField {
@@ -50,8 +50,8 @@
 }
 
 .groupHeaderAddButton:hover  {
-  background-color: #424242;
-  -unity-background-image-tint-color: #ffffff;
+    background-color: #424242;
+    -unity-background-image-tint-color: #ffffff;
 }
 
 .groupHeaderLabel {

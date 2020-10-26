@@ -5,7 +5,7 @@
 
 .blockField--variant {
     border-color: #888888;
-    background-color: #BCBCBC;
+    background-color: #B1B1B1;
 }
 
 .blockField::hover {
@@ -17,22 +17,22 @@
 }
 
 .sortMethodContainer {
-    background-color: #373b3e;
-    border-color: #2d2d2d;
+    background-color: #B1B1B1;
+    border-color: #888888;
 }
 
 .sortMethodButton {
-    background-color: #373b3e;
-    -unity-background-image-tint-color: #CCCCCC;
+    background-color: #B1B1B1;
+    -unity-background-image-tint-color: #999999;
 }
 
 .sortMethodButton:hover  {
-  background-color: #393d40;
-  -unity-background-image-tint-color: #ffffff;
+    background-color: #B1B1B1;
+    -unity-background-image-tint-color: #CCCCCC;
 }
 
 .sortMethodField {
-    background-color: #373b3e;
+    background-color: #BCBCBC;
 }
 
 .groupHeader {
@@ -40,7 +40,7 @@
 }
 
 .groupHeaderButton {
-    background-color: #2d2d2d;
+    background-color: #BCBCBC;
     border-color: #121212;
 }
 
@@ -50,8 +50,8 @@
 }
 
 .groupHeaderAddButton:hover  {
-  background-color: #424242;
-  -unity-background-image-tint-color: #ffffff;
+    background-color: #424242;
+    -unity-background-image-tint-color: #ffffff;
 }
 
 .groupHeaderLabel {
@@ -75,8 +75,8 @@
 }
 
 .sortMethodEmptyField {
-    background-color: #373b3e;
-    color: #999999;
+    background-color: #B1B1B1;
+    color: #444444;
 }
 
 .AddButton:hover {
